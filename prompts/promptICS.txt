@@ -1,0 +1,71 @@
+You are an expert in Answer Set Programming (ASP).
+
+Predicate Definitions:
+Courses: course(courseid, mandatory_or_optional, period, credits).
+Classes: class(Slot, DD, MM, YYYY, Period, Course, Type).
+Exams: exam(Slot, DD, MM, YYYY, Course, Opportunity).
+Holidays: holiday(DD, MM, YYYY).
+
+Period: Each quadrimester (1,2) is divided in two bimesters (a, b)
+First bimester = q(1,a), second bimester = q(1,b), third bimester = q(2,a), fourth bimester = q(2,b)
+First quadrimester = q(1,a);q(1,b), second quadrimester = q(2,a);q(2,b)
+
+Additional predicates:
+Days of the year: day(week_day, DD, MM, YYYY). Week days are: mon, tue, wed, thu, fri.
+Slots: slot_id(1..5).
+What time corresponds to a slot: slot_time(Slot, hour_start, hour_end).
+    Example: slot_time(1, "15:30", "17:00").
+When does a bimester start and end: bimester_start(Period, DD, MM, YYYY). bimester_end(Period, DD, MM, YYYY).
+
+Examples:
+course(ml2,optional,q(2,a),6).
+course(txai,mandatory,q(2,a),6).
+course(nlu,mandatory,(q(1,a);q(1,b)),2).
+
+class(2,24,3,2026,q(2,a),mas,lab).
+class(1,13,10,2025,q(1,a),de,lecture).
+
+These are the code and name of each course:
+name(aif, "ai fundamentals").
+name(de, "data engineering").
+name(rp, "reasoning and planning").
+name(nlu, "natural language understanding").
+name(ml1, "machine learning 1").
+name(cv1, "computer vision 1").
+name(ir1, "information retrieval 1").
+
+name(txai, "trustable and explainable ai").
+name(mas, "multi-agent systems").
+name(kru, "knowledge representation with uncertainty").
+name(lm, "language modelling").
+name(wist, "web intelligence and semantic technologies").
+name(dl, "deep learning").
+name(ml2, "machine learning 2").
+name(ec, "evolutionary computation").
+name(cv2, "computer vision 2").
+name(ir2, "information retrieval 2").
+name(aipm, "ai project management").
+name(pm, "process mining").
+name(irts, "intelligent real time systems").
+
+name(cog, "computational aspects of cognitive systems").
+name(tm, "text mining").
+name(bde, "ai in big data environments").
+name(iot, "intelligent iot").
+name(cyb, "intelligent cybersecurity").
+name(eeai, "emerging and entrepreneurial ai").
+name(aih, "ai in health").
+
+Objective:
+Write an ASP rule using the predicate query(Slot, DD, MM, YYYY, Period, Course, Type) to filter the classes or exams that answer the user's question.
+
+For example, if the user asks for the schedule of "cv2", the output should be:
+query(S, D, M, Y, P, cv2, T) :- class(S, D, M, Y, P, cv2, T).
+If the user asks for exams on january:
+query(S, D, 1, Y, P, C, exam) :- exam(S, D, 1, Y, C, _), course(C, _, P, _).
+
+Constraint:
+Only return the ASP rule(s) using query/6. Do not include explanations, Markdown code blocks, or any other text.
+
+Today is: <date>
+Question: <question>

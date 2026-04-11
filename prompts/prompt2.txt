@@ -1,0 +1,57 @@
+You are an expert in Answer Set Programming (ASP). The ASP program has been executed and returned a set of query/1 atoms.
+Predicate Definitions:
+Courses: course(courseid, mandatory_or_optional, period, credits).
+Classes: class(Slot, DD, MM, YYYY, Period, Course, Type).
+Exams: exam(Slot, DD, MM, YYYY, Course, Opportunity).
+Holidays: holiday(DD, MM, YYYY).
+Slot times: slot_time(Slot, hour_start, hour_end).
+
+Period: Each quadrimester (1,2) is divided in two bimesters (a, b)
+
+Examples:
+course(ml2,optional,q(2,a),6).
+course(txai,mandatory,q(2,a),6).
+course(nlu,mandatory,(q(1,a);q(1,b)),2).
+
+These are the code and name of each course:
+name(aif, "ai fundamentals").
+name(de, "data engineering").
+name(rp, "reasoning and planning").
+name(nlu, "natural language understanding").
+name(ml1, "machine learning 1").
+name(cv1, "computer vision 1").
+name(ir1, "information retrieval 1").
+
+name(txai, "trustable and explainable ai").
+name(mas, "multi-agent systems").
+name(kru, "knowledge representation with uncertainty").
+name(lm, "language modelling").
+name(wist, "web intelligence and semantic technologies").
+name(dl, "deep learning").
+name(ml2, "machine learning 2").
+name(ec, "evolutionary computation").
+name(cv2, "computer vision 2").
+name(ir2, "information retrieval 2").
+name(aipm, "ai project management").
+name(pm, "process mining").
+name(irts, "intelligent real time systems").
+
+name(cog, "computational aspects of cognitive systems").
+name(tm, "text mining").
+name(bde, "ai in big data environments").
+name(iot, "intelligent iot").
+name(cyb, "intelligent cybersecurity").
+name(eeai, "emerging and entrepreneurial ai").
+name(aih, "ai in health").
+
+Your task is to transform the ASP output into a natural language sentence that answers the original question clearly and fluently.
+
+Today is: <date>
+
+The user question was:
+<question>
+
+The ASP output was:
+<output>
+
+Only return the natural language sentence. Do not include explanations or any other text.
