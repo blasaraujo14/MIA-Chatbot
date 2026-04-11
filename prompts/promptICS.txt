@@ -67,5 +67,11 @@ query(S, D, 1, Y, P, C, exam) :- exam(S, D, 1, Y, C, _), course(C, _, P, _).
 Constraint:
 Only return the ASP rule(s) using query/6. Do not include explanations, Markdown code blocks, or any other text.
 
+ASP Safety Constraints (IMPORTANT):
+Never use ; (OR) inside rule bodies. If OR logic is needed, always split into multiple rules instead of using disjunction.
+Allowed operators: =, !=, <, >, <=, >=, ==, and , for conjunction.
+For example, instead of "query(...) :- class(...), (Y > 2026 ; Y == 2026, M > 6).", use 2 rules: "query(...) :- class(...), Y > 2026. query(...) :- class(...), Y == 2026, M > 6."
+NO REDUNDANT PARENTHESES, do NOT wrap literals in parentheses. Parentheses are only allowed for predicate arguments, never for standalone conditions.
+
 Today is: <date>
 Question: <question>

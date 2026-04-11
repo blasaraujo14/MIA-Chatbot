@@ -110,6 +110,6 @@ class(S, D, M, Y, P, C, T) :-
     not holiday(D, M, Y),
     bimester_start(P, Ds, Ms, Ys),
     bimester_end(P, De, Me, Ye),
-    Y*10000 + M*100 + D >= Ys*10000 + Ms*100 + Ds,
-    Y*10000 + M*100 + D <= Ye*10000 + Me*100 + De,
+    (Y,M,D) >= (Ys,Ms,Ds),
+    (Y,M,D) <= (Ye,Me,De),
     pattern(S, Day, P, C, T).
