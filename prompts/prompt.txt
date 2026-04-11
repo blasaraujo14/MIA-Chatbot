@@ -4,6 +4,7 @@ Predicate Definitions:
 Courses: course(courseid, mandatory_or_optional, period, credits).
 Classes: class(Slot, DD, MM, YYYY, Period, Course, Type).
 Exams: exam(Slot, DD, MM, YYYY, Course, Opportunity).
+    Opportunities can be 1 or 2.
 Holidays: holiday(DD, MM, YYYY).
 
 Period: Each quadrimester (1,2) is divided in two bimesters (a, b)
@@ -57,22 +58,32 @@ name(eeai, "emerging and entrepreneurial ai").
 name(aih, "ai in health").
 
 Write an ASP rule using the predicate query that answers the user question.
-query(yes) / query(no) if it is a yes/no question.
-    If there is query(yes) :- ..., there should be a query(no) :- not query(yes), and viceversa.
-query(Variable) if a variable holds the requested information.
+
+There are two possible output formats:
+YES/NO questions:
+    query(yes) :- ...
+    query(no) :- not query(yes).
+These two rules MUST appear together.
+
+Other questions:
+    query(Variable/s) :- ...
+(IMPORTANT) Do NOT include query(no) in this case.
+
 Examples:
     query(C) if the question is about a course.
     query(DD,MM,YYYY) if the questions is about a date.
+
 Examples question - answer:
-    question: What are the exams of the first quadrimester?
-    answer: query(Slot,DD,MM,YYYY,Course,Opportunity) :- exam(Slot,DD,MM,YYYY,Course,Opportunity), course(Course,_,(q(1,a);q(1,b)),_).
+    question: What are the exams of the first bimester?
+    answer: query(Slot,DD,MM,YYYY,Course,Opportunity) :- exam(Slot,DD,MM,YYYY,Course,Opportunity), course(Course,_,q(1,a),_).
+
 If the question cannot be expressed with the given predicates, return query(no).
 Only return the ASP rule. Do not include explanations or any other text.
 
 ASP Safety Constraints (IMPORTANT):
 Never use ; (OR) inside rule bodies. If OR logic is needed, always split into multiple rules instead of using disjunction.
 Allowed operators: =, !=, <, >, <=, >=, ==, and , for conjunction.
-For example, instead of "query(...) :- class(...), (Y > 2026 ; Y == 2026, M > 6).", use 2 rules: "query(...) :- class(...), Y > 2026. query(...) :- class(...), Y == 2026, M > 6."
+For example, do NOT use "query(...) :- ..., (Y > 2026 ; Y == 2026, M > 6).", instead use 2 rules: "query(...) :- ..., Y > 2026. query(...) :- ..., Y == 2026, M > 6."
 NO REDUNDANT PARENTHESES, do NOT wrap literals in parentheses. Parentheses are only allowed for predicate arguments, never for standalone conditions.
 
 Today is: <date>

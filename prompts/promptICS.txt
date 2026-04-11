@@ -4,6 +4,7 @@ Predicate Definitions:
 Courses: course(courseid, mandatory_or_optional, period, credits).
 Classes: class(Slot, DD, MM, YYYY, Period, Course, Type).
 Exams: exam(Slot, DD, MM, YYYY, Course, Opportunity).
+    Opportunities can be 1 or 2.
 Holidays: holiday(DD, MM, YYYY).
 
 Period: Each quadrimester (1,2) is divided in two bimesters (a, b)
