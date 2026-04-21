@@ -8,6 +8,7 @@ from icalendar import Calendar, Event
 from datetime import datetime, timedelta
 import clingo
 import pytz
+import logging
 
 base_dir = os.path.dirname(__file__)
 
@@ -16,6 +17,7 @@ CORS(app)
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 model = "gpt-4.1"
 
+app.logger.setLevel(logging.INFO)
 defaultEventDuration = 90 # In minutes
 
 program = open(os.path.join(base_dir, "asp_code", "course_info.lp"), "r", encoding="utf-8").read()
@@ -74,8 +76,8 @@ def getQuery():
         queries = re.findall(r'query\(.*?\.', block, re.DOTALL)
 
     pseudo_queries = [aspToEnglish(q) for q in queries]
-    print(f"User question: {question}", flush=True)
-    print(f"Queries extracted: {queries}", flush=True)
+    app.logger.info(f"User question: {question}")
+    app.logger.info(f"Queries extracted: {queries}")
 
     return jsonify({"queries": queries, "pseudo_queries": pseudo_queries})
 
@@ -102,8 +104,8 @@ def getResponse():
 
     today = datetime.today().strftime("%A, %d-%m-%Y")
     response = getModelResponse(prompt2.replace("<date>", today).replace("<question>", question).replace("<output>", ' '.join(values)))
-    print(f"User question: {question}", flush=True)
-    print(f"Model response: {response}", flush=True)
+    app.logger.info(f"User question: {question}")
+    app.logger.info(f"Model response: {response}")
 
     return jsonify({"out": values, "response": response})
 
