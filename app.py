@@ -74,8 +74,8 @@ def getQuery():
         queries = re.findall(r'query\(.*?\.', block, re.DOTALL)
 
     pseudo_queries = [aspToEnglish(q) for q in queries]
-    print("Date:", today)
-    print("Queries extracted:", queries)
+    print(f"User question: {question}", flush=True)
+    print(f"Queries extracted: {queries}", flush=True)
 
     return jsonify({"queries": queries, "pseudo_queries": pseudo_queries})
 
@@ -102,6 +102,8 @@ def getResponse():
 
     today = datetime.today().strftime("%A, %d-%m-%Y")
     response = getModelResponse(prompt2.replace("<date>", today).replace("<question>", question).replace("<output>", ' '.join(values)))
+    print(f"User question: {question}", flush=True)
+    print(f"Model response: {response}", flush=True)
 
     return jsonify({"out": values, "response": response})
 
