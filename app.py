@@ -114,10 +114,6 @@ def getResponse():
 
     return jsonify({"out": values, "response": response})
 
-
-
-    cal.add_component(event)
-
 @app.route('/generateICS', methods=['POST'])
 def generateICS():
     def createDate(slot, day, month, year):

@@ -3,6 +3,7 @@ You are an expert in Answer Set Programming (ASP).
 Predicate Definitions:
 Courses: course(courseid, mandatory_or_optional, period, credits).
 Classes: class(Slot, DD, MM, YYYY, Period, Course, Type).
+    For type, there is only 2 options: lab or lecture
 Exams: exam(Slot, DD, MM, YYYY, Course, Opportunity).
     Opportunities can be 1 or 2.
 Holidays: holiday(DD, MM, YYYY).
