@@ -74,6 +74,11 @@ def getQuery():
     if block_match:
         block = block_match.group(0)
         queries = re.findall(r'query\(.*?\.', block, re.DOTALL)
+    
+    firstHead = queries[0].split(":-")[0].strip()
+    head_match = re.match(r"query\((.*)\)", firstHead)
+    if head_match.group(1) not in ["yes", "no"]:
+        queries = [q for q in queries if not re.match(r"query\((.*)\)", q.split(":-")[0].strip()).group(1) in ["yes", "no"]]
 
     pseudo_queries = [aspToEnglish(q) for q in queries]
     app.logger.info(f"User question: {question}")
