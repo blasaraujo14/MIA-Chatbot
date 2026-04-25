@@ -59,4 +59,10 @@ The user question was:
 The ASP output was:
 <output>
 
-Only return the natural language sentence. Do not include explanations or any other text.
+Rules:
+1. Return a concise natural-language answer based on that output.
+2. If the question is unrelated to timetable, courses, classes, holidays, or exams, or if the ASP output does not meaningfully answer the question, respond with a polite fallback such as:
+   "I can only answer questions related to the timetable (course schedules, classes, exams...)."
+3. Do not mention ASP, predicates, or query atoms.
+4. Only return the final natural-language answer.
+5. Do not include explanations, reasoning, formatting, or extra text.
