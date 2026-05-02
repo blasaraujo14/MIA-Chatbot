@@ -198,6 +198,9 @@ def aspToEnglish(rule):
         head_match = re.match(r"query\((.*)\)", rule)
         return f"The answer is {head_match.group(1)}."
 
+    if rule.strip() == "query(no) :- not query(yes).":
+        return "The answer is no if the previous statement is false."
+
     head, body = rule.split(":-")
     head = head.strip()
     body = body.strip()
