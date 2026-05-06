@@ -15,7 +15,8 @@ base_dir = os.path.dirname(__file__)
 app = Flask(__name__)
 CORS(app)
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-model = "gpt-4.1"
+#model = "gpt-4.1"
+model = "gpt-5.5"
 
 app.logger.setLevel(logging.INFO)
 defaultEventDuration = 90 # In minutes
@@ -92,8 +93,8 @@ def getResponse():
     query = data.get('query', '')
     question = data.get('question', '')
 
-    inside = re.search(r'\((.*)\)', query.split(':-')[0].strip()).group(1)
-    numValues = len(re.split(r',(?![^()]*\))', inside))
+    match = re.search(r'^query\((.*?)\)\s*:-', query, re.MULTILINE)
+    numValues = len(re.split(r',(?![^()]*\))', match.group(1)))
     aspCode = program + '\n'+ query + '\n#show query/' + str(numValues) + '.'
 
     try:
