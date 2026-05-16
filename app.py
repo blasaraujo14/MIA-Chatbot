@@ -117,6 +117,8 @@ def getResponse():
 
 @app.route('/generateICS', methods=['POST'])
 def generateICS():
+    tz = pytz.timezone('Europe/Madrid')
+
     def createDate(slot, day, month, year):
         dateStr = f"{day} {month} {year}"
 
@@ -128,6 +130,9 @@ def generateICS():
             endDate = startDate + timedelta(minutes=defaultEventDuration)
         else:
             endDate = datetime.strptime(f"{dateStr} {endTime}", "%d %m %Y %H:%M")
+
+        startDate = tz.localize(startDate_naive)
+        endDate = tz.localize(endDate_naive)
 
         return startDate, endDate
 
