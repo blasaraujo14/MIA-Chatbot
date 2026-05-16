@@ -131,8 +131,8 @@ def generateICS():
         else:
             endDate = datetime.strptime(f"{dateStr} {endTime}", "%d %m %Y %H:%M")
 
-        startDate = tz.localize(startDate_naive)
-        endDate = tz.localize(endDate_naive)
+        startDate = tz.localize(startDate)
+        endDate = tz.localize(endDate)
 
         return startDate, endDate
 
