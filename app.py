@@ -93,11 +93,11 @@ def getResponse():
     query = data.get('query', '')
     question = data.get('question', '')
 
-    match = re.search(r'^query\((.*?)\)\s*:-', query, re.MULTILINE)
-    numValues = len(re.split(r',(?![^()]*\))', match.group(1)))
-    aspCode = program + '\n'+ query + '\n#show query/' + str(numValues) + '.'
-
     try:
+        match = re.search(r'^query\((.*?)\)\s*', query, re.MULTILINE)
+        numValues = len(re.split(r',(?![^()]*\))', match.group(1)))
+        aspCode = program + '\n'+ query + '\n#show query/' + str(numValues) + '.'
+    
         ctl = clingo.Control()
         ctl.add("base", [], aspCode)
         ctl.ground([("base", [])])
