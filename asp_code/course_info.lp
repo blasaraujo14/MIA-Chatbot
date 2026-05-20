@@ -7,7 +7,7 @@ name(rp, "reasoning and planning").
 name(nlu, "natural language understanding").
 name(ml1, "machine learning 1").
 name(cv1, "computer vision 1").
-name(ir1, "information retrieval 1").
+name(ir1, "intelligent robotics 1").
 
 name(txai, "trustable and explainable ai").
 name(mas, "multi-agent systems").
@@ -18,7 +18,7 @@ name(dl, "deep learning").
 name(ml2, "machine learning 2").
 name(ec, "evolutionary computation").
 name(cv2, "computer vision 2").
-name(ir2, "information retrieval 2").
+name(ir2, "intelligent robotics 2").
 name(aipm, "ai project management").
 name(pm, "process mining").
 name(irts, "intelligent real time systems").
